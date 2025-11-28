@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happiness Index Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="login">
+            <h1 class="text-center mb-4">Happiness Index Prediction</h1>
+
+            <form action="{{ url_for('predict_datapoint') }}" method="post" class="border p-4 rounded shadow">
+
+                <h3 class="mb-4 text-center">Enter Your Details</h3>
+
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input type="number" class="form-control" name="Age" placeholder="Enter your age" required min="10" max="100">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    <select class="form-control" name="Gender" required>
+                        <option selected disabled value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Daily Screen Time (hrs)</label>
+                    <input type="number" class="form-control" name="Daily_Screen_Time(hrs)" placeholder="Hours per day" required min="0" max="24" step="0.1">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Sleep Quality (1–10)</label>
+                    <input type="number" class="form-control" name="Sleep_Quality(1-10)" required min="1" max="10">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Stress Level (1–10)</label>
+                    <input type="number" class="form-control" name="Stress_Level(1-10)" required min="1" max="10">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Days Without Social Media (Last Week)</label>
+                    <input type="number" class="form-control" name="Days_Without_Social_Media" required min="0" max="7">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Exercise Frequency (per week)</label>
+                    <input type="number" class="form-control" name="Exercise_Frequency(week)" required min="0" max="14">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Social Media Platform</label>
+                    <select class="form-control" name="Social_Media_Platform" required>
+                        <option selected disabled value="">Select Platform</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="YouTube">YouTube</option>
+                        <option value="TikTok">TikTok</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Twitter">Twitter</option>
+                    </select>
+                </div>
+
+                <div class="mt-4 d-grid">
+                    <button class="btn btn-primary" type="submit">Predict Happiness Index</button>
+                </div>
+            </form>
+
+            <h2 class="text-center mt-4">Prediction: {{ results }}</h2>
+        </div>
+    </div>
+</body>
+</html>
