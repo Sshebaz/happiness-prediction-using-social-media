@@ -78,3 +78,51 @@ Project Folder
 * Implement predictive analytics dashboards.
 * Deploy a cloud‑based version with user accounts.
 * Introduce recommendation engine for lifestyle improvement.
+
+---
+
+## **9. Features**
+
+* Real-time Happiness Index prediction
+* User-friendly interactive web interface
+* Machine learning–based prediction pipeline
+* Clean data preprocessing and feature engineering
+* Social media and lifestyle behavior analysis
+* Modular and scalable project structure
+
+---
+
+## **10. Technologies Used**
+
+* **Python**, **Flask**
+* **Scikit-learn**, **Pandas**, **NumPy**
+* **HTML**, **CSS**, **Bootstrap**
+* **Matplotlib/Seaborn** (for EDA)
+* **Gunicorn** (for deployment)
+
+---
+
+## **11. How to Run the Project Locally**
+
+```
+# 1. Clone the repository
+ git clone <your_repo_url>
+
+# 2. Navigate to project folder
+ cd happiness-prediction
+
+# 3. Install dependencies
+ pip install -r requirements.txt
+
+# 4. Run the Flask app
+ python app.py
+```
+
+Then open your browser and go to:
+
+```
+http://127.0.0.1:5000/
+```
+
+
+
