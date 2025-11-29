@@ -37,14 +37,14 @@ Project Folder
 │
 ├── app.py                → Main Flask application
 ├── requirements.txt      → Dependencies
-├── static/               → CSS, JS, images
+├── venv/                 → Enviroment
 ├── templates/            → HTML templates (index, form, results)
 ├── artifacts/            → Trained ML model.pkl, preprocessor.pkl, row.csv, train.csv, test.csv
 ├── src/
-│   ├── components/       → Data ingestion, model training modules
+│   ├── components/       → Data ingestion, data transformation, model training modules
 │   ├── pipeline/         → Training & prediction pipeline
 │   └── utils.py          → Helper functions
-└── data/                 → Dataset files
+└── Notebook/data         → Dataset files
 ```
 
 ## **6. Skills Used**
