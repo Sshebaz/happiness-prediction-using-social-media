@@ -1,80 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happiness Index Prediction</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card-custom {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease-out;
+            color: #fff;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        label { font-weight: 500; }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="login">
-            <h1 class="text-center mb-4">Happiness Index Prediction</h1>
+    <div class="container">
+        <div class="card-custom shadow-lg">
+            <h1 class="text-center mb-4">✨ Happiness Index Prediction ✨</h1>
 
-            <form action="{{ url_for('predict_datapoint') }}" method="post" class="border p-4 rounded shadow">
+            <form id="predictionForm" action="{{ url_for('predict_datapoint') }}" method="post">
+                <h4 class="text-center mb-3">Fill Your Details</h4>
 
-                <h3 class="mb-4 text-center">Enter Your Details</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Age</label>
+                        <input type="number" class="form-control" name="Age" placeholder="Enter age" required min="10" max="100" />
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Age</label>
-                    <input type="number" class="form-control" name="Age" placeholder="Enter your age" required min="10" max="100">
-                </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Gender</label>
+                        <select class="form-control" name="Gender" required>
+                            <option selected disabled value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Gender</label>
-                    <select class="form-control" name="Gender" required>
-                        <option selected disabled value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Daily Screen Time (hrs)</label>
+                        <input type="number" class="form-control" name="Daily_Screen_Time(hrs)" placeholder="Hours per day" required min="0" max="24" step="0.1" />
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Daily Screen Time (hrs)</label>
-                    <input type="number" class="form-control" name="Daily_Screen_Time(hrs)" placeholder="Hours per day" required min="0" max="24" step="0.1">
-                </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Sleep Quality (1–10)</label>
+                        <input type="number" class="form-control" name="Sleep_Quality(1-10)" required min="1" max="10" />
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Sleep Quality (1–10)</label>
-                    <input type="number" class="form-control" name="Sleep_Quality(1-10)" required min="1" max="10">
-                </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Stress Level (1–10)</label>
+                        <input type="number" class="form-control" name="Stress_Level(1-10)" required min="1" max="10" />
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Stress Level (1–10)</label>
-                    <input type="number" class="form-control" name="Stress_Level(1-10)" required min="1" max="10">
-                </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Days Without Social Media (Last Week)</label>
+                        <input type="number" class="form-control" name="Days_Without_Social_Media" required min="0" max="7" />
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Days Without Social Media (Last Week)</label>
-                    <input type="number" class="form-control" name="Days_Without_Social_Media" required min="0" max="7">
-                </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Exercise Frequency (per week)</label>
+                        <input type="number" class="form-control" name="Exercise_Frequency(week)" required min="0" max="14" />
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Exercise Frequency (per week)</label>
-                    <input type="number" class="form-control" name="Exercise_Frequency(week)" required min="0" max="14">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Social Media Platform</label>
-                    <select class="form-control" name="Social_Media_Platform" required>
-                        <option selected disabled value="">Select Platform</option>
-                        <option value="Instagram">Instagram</option>
-                        <option value="YouTube">YouTube</option>
-                        <option value="TikTok">TikTok</option>
-                        <option value="Facebook">Facebook</option>
-                        <option value="LinkedIn">LinkedIn</option>
-                        <option value="Twitter">Twitter</option>
-                    </select>
+                    <div class="col-md-6">
+                        <label class="form-label">Social Media Platform</label>
+                        <select class="form-control" name="Social_Media_Platform" required>
+                            <option selected disabled value="">Select Platform</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="YouTube">YouTube</option>
+                            <option value="TikTok">TikTok</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Twitter">Twitter</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="mt-4 d-grid">
-                    <button class="btn btn-primary" type="submit">Predict Happiness Index</button>
+                    <button class="btn btn-light fw-bold" type="submit">Predict Happiness</button>
                 </div>
             </form>
 
-            <h2 class="text-center mt-4">Prediction: {{ results }}</h2>
+            <div id="resultBox" class="result-box text-center">
+                <h3>Prediction: <span id="resultText">{{ results }}</span></h3>
+            </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if ("{{ results }}") {
+                document.getElementById("resultBox").style.display = "block";
+                anime({
+                    targets: '#resultBox',
+                    opacity: [0, 1],
+                    translateY: [20, 0],
+                    duration: 1200,
+                    easing: 'easeOutExpo'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
+
